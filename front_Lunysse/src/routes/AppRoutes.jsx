@@ -23,8 +23,8 @@ import { Agendamento } from '../pages/Agendamento';
 import { ChatIA } from '../pages/ChatIA'; 
 import { Relatorios } from '../pages/Relatorios';
 import { Solicitacoes } from '../pages/Solicitacoes';
-import { Pacientes } from '../pages/Pacientes';
 import { PacienteDetalhe } from '../pages/PacienteDetalhe';
+import { SessaoDetalhes } from '../pages/SessaoDetalhes';
  
  
 /* ==============================
@@ -143,12 +143,13 @@ export const AppRoutes = () => {
         } />
           <Route path="/pacientes" element={
           <ProtectedRoute>
-            <Pacientes/> 
+            <PacienteDetalhe/> 
           </ProtectedRoute>
         } />
-        <Route path="/pacientes/:id" element={
+        
+        <Route path="/sessao/:id" element={
           <ProtectedRoute>
-            <PacienteDetalhe/> 
+            <SessaoDetalhes/> 
           </ProtectedRoute>
         } />
       </Routes>
