@@ -82,8 +82,8 @@ export const Home = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               {/* Botão para criar conta */}
               <Link to="/register">
-                <Button size="lg" className="w-full sm:w-auto">
-                  Começar Agora
+                <Button size="lg" className="px-8">
+                <h1 className='text-2xl'>Começar Agora</h1>  
                 </Button>
               </Link>
 
@@ -91,8 +91,8 @@ export const Home = () => {
               <a href="/about" onClick={(e) => {
            
               }}>
-                <Button variant="secondary" size="lg" className="w-full sm:w-auto ">
-                  Conhecer Recursos
+                <Button variant="secondary" size="lg" className="px-8">
+                  <h1 className='text-2xl'>Conhecer Recursos</h1>
                 </Button>
               </a>
             </div>
