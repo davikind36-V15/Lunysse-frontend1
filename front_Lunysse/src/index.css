@@ -19,13 +19,13 @@
 }
 
 /* ==============================
-   Paleta de cores personalizada
+   Paleta de cores personalizada (verdes)
    ============================== */
 @theme {
-  --color-dark: #000000;       /* Preto */
-  --color-medium: #026c7d;     /* Azul Turquesa */
-  --color-light: #2493BF;      /* Azul claro */
-  --color-accent: #5cbdcd;     /* Azul/acento esverdeado */
+  --color-dark: #004d00;       /* Verde escuro */
+  --color-medium: #028a0f;     /* Verde médio */
+  --color-light: #5cd65c;      /* Verde claro */
+  --color-accent: #99e699;     /* Verde acento claro */
   --color-background: #ffffff; /* Branco */
 }
 
@@ -86,9 +86,9 @@ body {
   font-weight: 500; /* Peso médio */
   background: linear-gradient(
     135deg,
-    var(--color-light) 0%,         /* Começa azul claro */
-    var(--color-medium) 50%,       /* Vai para azul médio */
-    var(--color-background) 100%   /* Termina bege claro */
+    var(--color-light) 0%,         /* Começa verde claro */
+    var(--color-medium) 50%,       /* Vai para verde médio */
+    var(--color-background) 100%   /* Termina branco */
   );
   min-height: 100vh; /* Sempre ocupa altura mínima da tela */
 }
@@ -222,15 +222,15 @@ h2 {
 }
 .input-field:focus {
   background: rgba(255, 255, 255, 0.2);           /* Mais visível no foco */
-  border-color: var(--color-light);               /* Destacado em azul claro */
-  box-shadow: 0 0 0 3px rgba(36, 147, 191, 0.1);  /* Glow em volta */
+  border-color: var(--color-light);               /* Destacado em verde claro */
+  box-shadow: 0 0 0 3px rgba(92, 214, 92, 0.1);  /* Glow em volta */
 }
 
 /* ==============================
    Página mobile de redirecionamento
    ============================== */
 .mobile-redirect {
-  background: var(--color-dark); /* Fundo azul escuro */
+  background: var(--color-dark); /* Fundo verde escuro */
   color: white;                  /* Texto branco */
   min-height: 100vh;             /* Ocupa tela inteira */
   display: flex;                 /* Flexbox */

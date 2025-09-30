@@ -1,41 +1,42 @@
 // Importação de rotas do React Router
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
- 
+
 // Importa contexto de autenticação
 import { useAuth } from '../context/AuthContext';
- 
+
 // Componentes reutilizáveis
 import { Sidebar } from '../components/Sidebar';
 import { PublicNavbar } from '../components/PublicNavbar';
 import { LoadingSpinner } from '../components/LoadingSpinner';
- 
+
 // Páginas públicas
 import { Home } from '../pages/Home';
 import { About } from '../pages/About';
 import { Login } from '../pages/Login';
 import { Register } from '../pages/Register';
- 
+
 // Páginas protegidas (apenas para usuários autenticados)
 import { DashboardPsicologo } from '../pages/DashboardPsicologo';
 import { DashboardPaciente } from '../pages/DashboardPaciente';
-import { NotFound } from '../pages/NotFound';
 import { Agendamento } from '../pages/Agendamento';
-import { ChatIA } from '../pages/ChatIA'; 
 import { Relatorios } from '../pages/Relatorios';
-import { Solicitacoes } from '../pages/Solicitacoes';
+import { Pacientes } from '../pages/Pacientes';
 import { PacienteDetalhe } from '../pages/PacienteDetalhe';
 import { SessaoDetalhes } from '../pages/SessaoDetalhes';
- 
- 
+import { ChatIA } from '../pages/ChatIA';
+import { Solicitacoes } from '../pages/Solicitacoes';
+import { Historico } from '../pages/Historico';
+import { NotFound } from '../pages/NotFound';
+
 /* ==============================
    Componente de rota protegida
    ============================== */
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth(); // Obtém usuário e estado de carregamento
- 
+  
   if (loading) return <LoadingSpinner size="lg" />; // Mostra spinner enquanto carrega
   if (!user) return <Navigate to="/login" replace />; // Redireciona não autenticados para login
- 
+  
   return (
     <div className="min-h-screen flex">
       <Sidebar /> {/* Sidebar lateral sempre visível */}
@@ -45,26 +46,26 @@ const ProtectedRoute = ({ children }) => {
     </div>
   );
 };
- 
+
 /* ==============================
    Componente de rota pública
    ============================== */
 const PublicRoute = ({ children }) => {
   const { user, loading } = useAuth(); // Obtém usuário e estado de carregamento
- 
+  
   if (loading) return <LoadingSpinner size="lg" />; // Mostra spinner enquanto carrega
   if (user) return <Navigate to="/dashboard" replace />; // Redireciona usuário logado para dashboard
- 
+  
   return (
     <div className="min-h-screen">
       <PublicNavbar /> {/* Navbar pública */}
-      <main className=" mx-auto ">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {children} {/* Conteúdo da página pública */}
       </main>
     </div>
   );
 };
- 
+
 /* ==============================
    Componente Dashboard condicional
    ============================== */
@@ -73,7 +74,7 @@ const Dashboard = () => {
   // Retorna dashboard específico baseado no tipo do usuário
   return user?.type === 'psicologo' ? <DashboardPsicologo /> : <DashboardPaciente />;
 };
- 
+
 /* ==============================
    Configuração de rotas da aplicação
    ============================== */
@@ -81,7 +82,7 @@ export const AppRoutes = () => {
   return (
     <Router>
       <Routes>
- 
+
         {/* ==============================
            Rotas Públicas
            ============================== */}
@@ -90,25 +91,25 @@ export const AppRoutes = () => {
             <Home />
           </PublicRoute>
         } />
-       
+        
         <Route path="/about" element={
           <PublicRoute>
             <About />
           </PublicRoute>
         } />
-       
+        
         <Route path="/login" element={
           <PublicRoute>
             <Login />
           </PublicRoute>
         } />
-       
+        
         <Route path="/register" element={
           <PublicRoute>
             <Register />
           </PublicRoute>
         } />
-       
+        
         {/* ==============================
            Rotas Protegidas
            ============================== */}
@@ -117,43 +118,60 @@ export const AppRoutes = () => {
             <Dashboard /> {/* Escolhe dashboard de psicólogo ou paciente */}
           </ProtectedRoute>
         } />
+        
         <Route path="/agendamento" element={
           <ProtectedRoute>
-            <Agendamento /> 
+            <Agendamento />
           </ProtectedRoute>
         } />
         
-        <Route path="*" element= {
-          <NotFound/>
-        }/>
+        <Route path="/solicitacoes" element={
+          <ProtectedRoute>
+            <Solicitacoes />
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/pacientes" element={
+          <ProtectedRoute>
+            <Pacientes />
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/pacientes/:id" element={
+          <ProtectedRoute>
+            <PacienteDetalhe /> {/* Página de detalhes de paciente específico */}
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/sessao/:sessionId" element={
+          <ProtectedRoute>
+            <SessaoDetalhes /> {/* Detalhes de sessão específica */}
+          </ProtectedRoute>
+        } />
+        
         <Route path="/chat-ia" element={
           <ProtectedRoute>
-            <ChatIA /> 
-          </ProtectedRoute>
-        } />
-         <Route path="/relatorios" element={
-          <ProtectedRoute>
-            <Relatorios /> 
-          </ProtectedRoute>
-        } />
-         <Route path="/solicitacoes" element={
-          <ProtectedRoute>
-            <Solicitacoes /> 
-          </ProtectedRoute>
-        } />
-          <Route path="/pacientes" element={
-          <ProtectedRoute>
-            <PacienteDetalhe/> 
+            <ChatIA />
           </ProtectedRoute>
         } />
         
-        <Route path="/sessao/:id" element={
+        <Route path="/relatorios" element={
           <ProtectedRoute>
-            <SessaoDetalhes/> 
+            <Relatorios />
           </ProtectedRoute>
         } />
+        
+        <Route path="/historico" element={
+          <ProtectedRoute>
+            <Historico />
+          </ProtectedRoute>
+        } />
+        
+        {/* ==============================
+           Rota para página 404
+           ============================== */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
 };
- 

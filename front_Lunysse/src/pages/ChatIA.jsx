@@ -137,7 +137,7 @@ export const ChatIA = () => {
 <div className="max-w-4xl mx-auto">
 <div className="mb-8">
 <h1 className="text-3xl font-bold text-dark mb-2">Chat com IA</h1>
-<p className="text-white">Assistente especializada em psicologia para apoiar sua prática clínica</p>
+<p className="text-pink">Assistente especializada em psicologia para apoiar sua prática clínica</p>
 </div>
  
       <Card className="h-[600px] flex flex-col">
@@ -214,7 +214,7 @@ export const ChatIA = () => {
 <div className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center">
 <Bot size={16} />
 </div>
-<div className="bg-gray-100 rounded-2xl px-4 py-3">
+<div className="bg-green-600 rounded-2xl px-4 py-3">
 <div className="flex items-center space-x-2">
 <Loader2 size={16} className="animate-spin text-accent" />
 <span className="text-sm text-gray-600">Pensando...</span>
